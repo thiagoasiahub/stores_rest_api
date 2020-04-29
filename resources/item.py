@@ -49,10 +49,10 @@ class Item(Resource):
 
         item = ItemModel.find_by_name(name)
 
-        if item is None:
-            item = ItemModel(name, **data)
-        else:
+        if item:
             item.price = data['price']
+        else:
+            item = ItemModel(name, **data)
 
         item.save_to_db()
 
